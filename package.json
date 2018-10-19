@@ -1,0 +1,12 @@
+{
+  "name": "Blog",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:Wycers/Wycers.github.io.git",
+  "author": "wycer <734849165@qq.com>",
+  "license": "MIT",
+  "scripts": {
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
+  }
+}
