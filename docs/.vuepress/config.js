@@ -1,13 +1,12 @@
 module.exports = {
 
-    title: '记录集',
-    description: '记录生活，记录成长',
+    title: 'Wycer\'s Blog',
+    description: '记录奇怪的日常',
     base: '/',
     head: [
-        ['link', { rel: 'icon', href: `/favicon.png` }]
+        ['link', { rel: 'icon', href: `/favicon.ico` }]
     ],
     host: '0.0.0.0',
-    //mac下port未生效
     port: 8081,
 
     themeConfig: {
