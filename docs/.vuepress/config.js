@@ -8,18 +8,22 @@ module.exports = {
     ],
     host: '0.0.0.0',
     port: 8081,
-
     themeConfig: {
-        //gitc 仓库地址
-        repo: 'Wycers/Wycers.github.io',
-        //导航栏
+        // 博客背景图片
+        background: `/background/path`,
+        // github card
+        github: 'Wycers',
+        // 博客的 logo
+        logo: '/logo/path',
+        // 定制文章标题颜色
+        accentColor: '#ac3e40',
+        // 每页显示的文章数量
+        per_page: 5,
+        // 和 vuepress 默认主题一样, 定制导航栏上的链接
         nav: [
-            { text: 'Home', link: '/' }
-        ],
-
-        //搜索
-        search: true,
-        searchMaxSuggestions: 10,
-        lastUpdated: 'Last Updated', // string | boolean
+            { text: 'HOME', link: '/' },
+            { text: 'GITHUB', link: 'https://github.com/bloss' },
+            { text: '关于我', link: '/about/' }, 
+        ]
     }
 }
