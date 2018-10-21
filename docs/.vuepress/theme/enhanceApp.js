@@ -1,9 +1,11 @@
 import routes from './enhancers/routes';
 import tags from './enhancers/tags';
 import optionHandler from './enhancers/optionHandler';
-import Vuetify from 'vuetify'
-import colors from 'vuetify/es5/util/colors'
+import colors from '../../../node_modules/vuetify/es5/util/colors';
+import '../../../node_modules/vuetify/dist/vuetify.min.css';
+import '../../../node_modules/material-design-icons-iconfont/dist/material-design-icons.css'; 
 
+import Vuetify from '../../../node_modules/vuetify'
 export default ({ Vue, options, router, siteData }) => {
     const { themeConfig, pages } = siteData;
 
