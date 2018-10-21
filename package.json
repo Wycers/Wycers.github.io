@@ -9,16 +9,20 @@
     "docs:build": "vuepress build docs"
   },
   "dependencies": {
-    "material-design-icons-iconfont": "^3.0.3",
-    "vuepress-theme-yubisaki": "^3.0.3",
-    "webpack-serve": "^2.0.2",
     "autosize": "^4.0.2",
     "axios": "^0.18.0",
     "date-fns": "^1.29.0",
     "github-markdown-css": "^2.10.0",
     "html2canvas": "^1.0.0-alpha.12",
+    "material-design-icons-iconfont": "^3.0.3",
     "node-polyglot": "^2.3.0",
     "raw-loader": "^0.5.1",
-    "vuetify": "^1.3.0"
+    "vuepress-theme-yubisaki": "^3.0.3",
+    "vuetify": "^1.3.0",
+    "webpack-serve": "^2.0.2"
+  },
+  "devDependencies": {
+    "pug": "^2.0.3",
+    "pug-plain-loader": "^1.0.0"
   }
 }

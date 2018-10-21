@@ -8,11 +8,6 @@
         <img class="logo"
           v-if="$site.themeConfig.logo"
           :src="$withBase($site.themeConfig.logo)">
-        <span class="site-name"
-          v-if="$site.title"
-          :class="{ 'can-hide': $site.themeConfig.logo }">
-          {{ $site.title }}
-        </span>
       </router-link>
       <NavLinks/>
       <div class="links">
@@ -36,23 +31,6 @@
         <v-icon>more_vert</v-icon>
       </v-btn>
     </v-toolbar>
-    <!-- <div class="nav-header">
-      <SidebarButton @toggle-sidebar="$emit('toggle-sidebar')"/>
-      <router-link :to="$localePath" class="home-link">
-        <img class="logo"
-          v-if="$site.themeConfig.logo"
-          :src="$withBase($site.themeConfig.logo)">
-        <span class="site-name"
-          v-if="$site.title"
-          :class="{ 'can-hide': $site.themeConfig.logo }">
-          {{ $site.title }}
-        </span>
-      </router-link>
-      <NavLinks class="can-hide"/>
-      <div class="links">
-        <SearchBox v-if="$site.themeConfig.search !== false"/>
-      </div>
-    </div> -->
   </header>
 </template>
 
@@ -91,7 +69,6 @@ export default {
   .site-name {
     font-size: 1.3rem;
     font-weight: 600;
-    color: $textColor;
     position: relative;
   }
 

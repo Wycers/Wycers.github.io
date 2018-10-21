@@ -1,38 +1,24 @@
-<template>
-  <div>
-    <div class="page card">
-      <div class="content-header">
-        <h1 v-if="title" 
+<template lang="pug">
+  div
+    div(class="page card")
+      div(class="content-header")
+        h1(v-if="title" 
           class="page-title" 
-          :style="overrideStyle">
-          {{ title }}
-        </h1>
-        <span class="page-timestamp">{{ createTime }}</span>      
-      </div>
-      <Content :custom="false"/>
-      <div class="content edit-link" v-if="editLink">
-        <a :href="editLink" target="_blank" rel="noopener noreferrer">{{ editLinkText }}</a>
-        <OutboundLink/>
-      </div>
-      <div class="content page-nav" v-if="prev || next">
-        <p class="inner">
-          <span v-if="prev" class="prev">
-            ← <router-link v-if="prev" class="prev" :to="prev.path">
-              {{ prev.title || prev.path }}
-            </router-link>
-          </span>
-          <span v-if="next" class="next">
-            <router-link v-if="next" :to="next.path">
-              {{ next.title || next.path }}
-            </router-link> →
-          </span>
-        </p>
-      </div>
-    </div>
-    <div id="comment-container" v-if="$site.themeConfig.comment">
-        <Comment />
-    </div>
-  </div>
+          :style="overrideStyle"
+        ) {{ title }}
+        span (class="page-timestamp") {{ createTime }}  
+      Content(:custom="false")
+      div(class="content edit-link" v-if="editLink")
+        a(:href="editLink" target="_blank" rel="noopener noreferrer") {{ editLinkText }}
+        OutboundLink
+      div(class="content page-nav" v-if="prev || next")
+        p(class="inner")
+          span(v-if="prev" class="prev") ← 
+            router-link(v-if="prev" class="prev" :to="prev.path") {{ prev.title || prev.path }}
+          span(v-if="next" class="next")
+            router-link(v-if="next" :to="next.path") {{ next.title || next.path }}
+    div(id="comment-container" v-if="$site.themeConfig.comment")
+       Comment
 </template>
 
 <script>

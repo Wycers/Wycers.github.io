@@ -1,16 +1,20 @@
-<template>
-  <v-btn flat
+<template lang="pug">
+  v-btn(
+    flat
     :to="link"
     v-if="!isExternal(link)"
     :exact="link === '/'"
-  > {{item.text}} </v-btn>
-  <a
+  ) {{item.text}} 
+  v-btn(
     v-else
+    flat
     :href="link"
     class="nav-link"
     :target="isMailto(link) ? null : '_blank'"
     :rel="isMailto(link) ? null : 'noopener noreferrer'"
-  >{{ item.text }}</a>
+    tag="a"
+  ) 
+    span {{ item.text }} 
 </template>
 
 <script>
