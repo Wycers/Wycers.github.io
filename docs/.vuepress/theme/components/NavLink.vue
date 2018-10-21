@@ -1,10 +1,9 @@
 <template>
-  <router-link
-    class="nav-link"
+  <v-btn flat
     :to="link"
     v-if="!isExternal(link)"
     :exact="link === '/'"
-  >{{ item.text }}</router-link>
+  > {{item.text}} </v-btn>
   <a
     v-else
     :href="link"

@@ -10,6 +10,7 @@
     "docs:build": "vuepress build docs"
   },
   "dependencies": {
+    "material-design-icons-iconfont": "^3.0.3",
     "vuepress-theme-yubisaki": "^3.0.3"
   }
 }

@@ -1,6 +1,42 @@
 <template>
   <header class="navbar">
-    <div class="nav-header">
+    <v-toolbar dark color="blue">
+      <v-toolbar-side-icon></v-toolbar-side-icon>
+
+      <v-toolbar-title class="white--text">{{ $site.title }}</v-toolbar-title>
+      <router-link :to="$localePath" class="home-link">
+        <img class="logo"
+          v-if="$site.themeConfig.logo"
+          :src="$withBase($site.themeConfig.logo)">
+        <span class="site-name"
+          v-if="$site.title"
+          :class="{ 'can-hide': $site.themeConfig.logo }">
+          {{ $site.title }}
+        </span>
+      </router-link>
+      <NavLinks/>
+      <div class="links">
+        <SearchBox v-if="$site.themeConfig.search !== false"/>
+      </div>
+      <v-spacer></v-spacer>
+      
+      <v-btn icon>
+        <v-icon>search</v-icon>
+      </v-btn>
+
+      <v-btn icon>
+        <v-icon>apps</v-icon>
+      </v-btn>
+
+      <v-btn icon>
+        <v-icon>refresh</v-icon>
+      </v-btn>
+
+      <v-btn icon>
+        <v-icon>more_vert</v-icon>
+      </v-btn>
+    </v-toolbar>
+    <!-- <div class="nav-header">
       <SidebarButton @toggle-sidebar="$emit('toggle-sidebar')"/>
       <router-link :to="$localePath" class="home-link">
         <img class="logo"
@@ -16,7 +52,7 @@
       <div class="links">
         <SearchBox v-if="$site.themeConfig.search !== false"/>
       </div>
-    </div>
+    </div> -->
   </header>
 </template>
 
@@ -24,6 +60,7 @@
 import SidebarButton from "./SidebarButton.vue";
 import SearchBox from "./SearchBox.vue";
 import NavLinks from "./NavLinks.vue";
+import { isExternal, isMailto, ensureExt } from '../lib/util'
 
 export default {
   components: { SidebarButton, NavLinks, SearchBox }
@@ -43,10 +80,6 @@ export default {
 
 .navbar {
   position: relative;
-
-  a, span, img {
-    display: inline-block;
-  }
 
   .logo {
     height: $navbarHeight - 1.4rem;

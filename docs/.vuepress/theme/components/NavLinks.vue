@@ -88,32 +88,24 @@ export default {
 @import '../styles/config.styl'
 
 .nav-links
-  display inline-block
-  a
-    line-height 1.25rem
-    color inherit
-    &:hover, &.router-link-active
-      color $accentColor
+  display inline
   .nav-item
-    cursor: pointer
-    position relative
-    display inline-block
-    margin-left 1.5rem
-    font-weight 500
-    line-height 2rem
-  .github-link
-    margin-left 1.5rem
+    display inline
+
+    // margin-left 1.5rem
+    // font-weight 500
+    text-align center
 
 @media (max-width: $MQMobile)
   .nav-links
-    .nav-item, .github-link
-      margin-left 0
+    .github-link
+      margin 0
 
-@media (min-width: $MQMobile)
-  .nav-links
-    a
-      &:hover, &.router-link-active
-        color $textColor
-        margin-bottom -2px
-        border-bottom 2px solid lighten($accentColor, 5%)
+// @media (min-width: $MQMobile)
+//   .nav-links
+//     a
+//       &:hover, &.router-link-active
+//         color $textColor
+//         margin-bottom -2px
+//         border-bottom 2px solid lighten($accentColor, 5%)
 </style>

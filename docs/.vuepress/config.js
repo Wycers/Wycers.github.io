@@ -15,6 +15,7 @@ module.exports = {
         github: 'Wycers',
         // 博客的 logo
         logo: '/logo/path',
+        tags: true,
         // 定制文章标题颜色
         accentColor: '#ac3e40',
         // 每页显示的文章数量
@@ -22,7 +23,8 @@ module.exports = {
         // 和 vuepress 默认主题一样, 定制导航栏上的链接
         nav: [
             { text: 'HOME', link: '/' },
-            { text: 'GITHUB', link: 'https://github.com/bloss' },
+            { text: 'GITHUB', link: 'https://github.com/Wycers' },
+            { text: 'TAGS', link: '/tags/', tags: true }, // 指定它为标签目录
             { text: '关于我', link: '/about/' }, 
         ]
     }

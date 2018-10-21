@@ -163,6 +163,10 @@
 
 <script>
 import Mixin from "./mixin";
+import 'vuetify/src/stylus/main.styl'
+import 'vuetify/src/stylus/settings/_colors.styl'
+import 'material-design-icons-iconfont/dist/material-design-icons.css' 
+
 import { GT_COMMENT, GT_ACCESS_TOKEN } from "./const";
 import {
     queryParse,
