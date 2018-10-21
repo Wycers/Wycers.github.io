@@ -22,6 +22,8 @@ before_install:
 - npm install -g vuepress
 install:
 - yarn
+- cd ./docs/.vuepress/theme
+- yarn
 script:
 - yarn docs:build
 after_success:
