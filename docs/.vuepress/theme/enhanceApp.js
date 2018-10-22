@@ -1,22 +1,36 @@
-import routes from './enhancers/routes';
-import tags from './enhancers/tags';
-import optionHandler from './enhancers/optionHandler';
-import colors from '../../../node_modules/vuetify/es5/util/colors';
-import '../../../node_modules/vuetify/dist/vuetify.min.css';
-import '../../../node_modules/material-design-icons-iconfont/dist/material-design-icons.css'; 
+import i18n from './libs/i18n'
+import blog from './libs/blog'
+// import essay from './libs/essay'
+import VueContentPlaceholders from 'vue-content-placeholders'
+// import VueSimplemde from 'vue-simplemde'
+import routes from './libs/routes'
+import components from './components'
+import './styles/theme.styl'
 
-import Vuetify from '../../../node_modules/vuetify'
-export default ({ Vue, options, router, siteData }) => {
-    const { themeConfig, pages } = siteData;
-
-    Vue.use(optionHandler, { themeConfig });
-    Vue.use(routes, { router, themeConfig });
-    Vue.use(tags, { router, pages, themeConfig });
-    Vue.use(Vuetify, {
-        theme: {
-          primary: colors.red.darken1, // #E53935
-          secondary: colors.red.lighten4, // #FFCDD2
-          accent: colors.indigo.base // #3F51B5
-        }
-    })
+export default ({
+  Vue,
+  options,
+  router,
+  siteData
+}) => {
+  const {
+    themeConfig: theme,
+    pages
+  } = siteData
+  Vue.use(i18n, theme.lang)
+  Vue.use(VueContentPlaceholders)
+  // Vue.use(VueSimplemde)
+  Vue.use(blog, {
+    theme,
+    pages
+  })
+  // Vue.use(essay, {
+  //   theme,
+  //   pages
+  // })
+  Vue.use(routes, {
+    router,
+    theme
+  })
+  Vue.use(components, theme)
 }

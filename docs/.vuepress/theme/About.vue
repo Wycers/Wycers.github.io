@@ -1,12 +1,12 @@
 <template>
-  <div>
-    <h1>404</h1>
+  <div class="container">
+    <Content></Content>
   </div>
 </template>
 <script>
 export default {
-  name: 'NotFound'
-}
+  name: ''
+};
 </script>
 <style lang="stylus">
 </style>

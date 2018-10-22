@@ -1,25 +1,8 @@
 <template>
   <div class="search-box">
-    <input
-      @input="query = $event.target.value"
-      aria-label="Search"
-      :value="query"
-      autocomplete="off"
-      spellcheck="false"
-      @focus="focused = true"
-      @blur="focused = false"
-      @keyup.enter="go(focusIndex)"
-      @keyup.up="onUp"
-      @keyup.down="onDown">
-    <ul class="suggestions"
-      v-if="showSuggestions"
-      :class="{ 'align-right': alignRight }"
-      @mouseleave="unfocus">
-      <li class="suggestion" v-for="(s, i) in suggestions"
-        :key="i"
-        :class="{ focused: i === focusIndex }"
-        @mousedown="go(i)"
-        @mouseenter="focus(i)">
+    <input @input="query = $event.target.value" aria-label="Search" :value="query" autocomplete="off" spellcheck="false" @focus="focused = true" @blur="focused = false" @keyup.enter="go(focusIndex)" @keyup.up="onUp" @keyup.down="onDown">
+    <ul class="suggestions" v-if="showSuggestions" :class="{ 'align-right': alignRight }" @mouseleave="unfocus">
+      <li class="suggestion" v-for="(s, i) in suggestions" :class="{ focused: i === focusIndex }" :key="i" @mousedown="go(i)" @mouseenter="focus(i)">
         <a :href="s.path" @click.prevent>
           <span class="page-title">{{ s.title || s.path }}</span>
           <span v-if="s.header" class="header">&gt; {{ s.header.title }}</span>
@@ -30,14 +13,10 @@
 </template>
 
 <script>
-import { pageNormalize } from "../lib/util";
-import navLayoutMixin from '../lib/navLayout.mixin'
-
 export default {
-  mixins: [navLayoutMixin],  
   data() {
     return {
-      query: "",
+      query: '',
       focused: false,
       focusIndex: 0
     };
@@ -52,17 +31,11 @@ export default {
         return;
       }
 
-      const max = 5;
-      const pages = this.pages;
+      const { pages, themeConfig } = this.$site;
+      const max = themeConfig.searchMaxSuggestions || 5;
       const localePath = this.$localePath;
-      const matches = item => {
-        const keywords = this.getKeywords(item);
-        return (
-          item.title && 
-          item.title.toLowerCase().indexOf(query) > -1 ||
-          keywords.some(keyword => keyword.indexOf(query) > -1)
-        );
-      };
+      const matches = item =>
+        item.title && item.title.toLowerCase().indexOf(query) > -1;
       const res = [];
       for (let i = 0; i < pages.length; i++) {
         if (res.length >= max) break;
@@ -80,7 +53,7 @@ export default {
             if (matches(h)) {
               res.push(
                 Object.assign({}, p, {
-                  path: p.path + "#" + h.slug,
+                  path: p.path + '#' + h.slug,
                   header: h
                 })
               );
@@ -98,19 +71,13 @@ export default {
     }
   },
   methods: {
-    getKeywords(page) {
-      const metaList = (page.frontmatter ? page.frontmatter.meta : []) || [];
-      let keywords = metaList.filter(meta => meta.name === "keywords");
-      keywords = keywords.length ? keywords[0].content.split(" ") : [];
-      return keywords.map(keyword => keyword.toLowerCase())
-    },
     getPageLocalePath(page) {
       for (const localePath in this.$site.locales || {}) {
-        if (localePath !== "/" && page.path.indexOf(localePath) === 0) {
+        if (localePath !== '/' && page.path.indexOf(localePath) === 0) {
           return localePath;
         }
       }
-      return "/";
+      return '/';
     },
     onUp() {
       if (this.showSuggestions) {
@@ -132,7 +99,7 @@ export default {
     },
     go(i) {
       this.$router.push(this.suggestions[i].path);
-      this.query = "";
+      this.query = '';
       this.focusIndex = 0;
     },
     focus(i) {
@@ -155,7 +122,7 @@ export default {
 
   input {
     cursor: pointer;
-    width: 10rem;
+    width: 15rem;
     color: lighten($textColor, 25%);
     display: inline-block;
     border: 1px solid darken($borderColor, 10%);
@@ -165,7 +132,7 @@ export default {
     padding: 0 0.5rem 0 2rem;
     outline: none;
     transition: all 0.2s ease;
-    background: #fff url('../assets/search.svg') 0.6rem 0.5rem no-repeat;
+    background: #fff url('./search.svg') 0.6rem 0.5rem no-repeat;
     background-size: 1rem;
 
     &:focus {

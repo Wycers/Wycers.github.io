@@ -1,69 +1,131 @@
 <template>
-  <v-app id="inspire">
-    <v-navigation-drawer
-      v-model="drawer"
-      fixed
-      app
-    >
-      <v-list dense>
-        <v-list-tile @click="">
-          <v-list-tile-action>
-            <v-icon>home</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>Home</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-        <v-list-tile @click="">
-          <v-list-tile-action>
-            <v-icon>contact_mail</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>Contact</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-      </v-list>
+  <v-app v-scroll="onScroll">
+    <v-progress-linear :height="3" color="accent" :indeterminate="progressRunning" :background-opacity="0.4" class="blog-progress" v-show="progressRunning"></v-progress-linear>
+    <v-navigation-drawer app :mobile-break-point="mobilePoint" :mini-variant.sync="miniNav" :width="240" v-model="navVisible">
+      <SideNav></SideNav>
     </v-navigation-drawer>
-    <v-toolbar color="indigo" dark fixed app>
-      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-toolbar-title>Application</v-toolbar-title>
-    </v-toolbar>
+    <Header :layout="layout" @toggleNav="toggleNav"></Header>
     <v-content>
-      <v-container fluid fill-height>
-        <v-layout
-          justify-center
-          align-center
-        >
-          <v-flex text-xs-center>
-            <v-tooltip left>
-              <v-btn slot="activator" :href="source" icon large target="_blank">
-                <v-icon large>code</v-icon>
-              </v-btn>
-              <span>Source</span>
-            </v-tooltip>
-            <v-tooltip right>
-              <v-btn slot="activator" icon large href="https://codepen.io/johnjleider/pen/rJdVMq" target="_blank">
-                <v-icon large>mdi-codepen</v-icon>
-              </v-btn>
-              <span>Codepen</span>
-            </v-tooltip>
-          </v-flex>
-        </v-layout>
-      </v-container>
+      <component :is="layout"></component>
+      <Footer></Footer>
     </v-content>
-    <v-footer color="indigo" app fixed>
-      <span class="white--text">&copy; 2017</span>
-    </v-footer>
+    <transition name="scale-transition">
+      <v-btn fab fixed right bottom color="accent" @click="$vuetify.goTo(0)" v-show="offsetTop > 300">
+        <i class="fa fa-lg fa-chevron-up"></i>
+      </v-btn>
+    </transition>
   </v-app>
 </template>
-
 <script>
-  export default {
-    data: () => ({
-      drawer: null
-    }),
-    props: {
-      source: String
+import Vue from 'vue';
+import SideNav from './SideNav';
+import Header from './Header';
+import Footer from './Footer';
+import Home from './Home';
+import Tags from './Tags';
+import Post from './Post';
+import About from './About';
+import Essay from './Essay';
+import GitCard from './GitCard';
+// import Toc from './Toc';
+import { pathToComponentName, updateMetaTags } from './libs/utils';
+
+export default {
+  name: 'layout',
+  components: {
+    SideNav,
+    Header,
+    Footer,
+    Home,
+    Tags,
+    Post,
+    About,
+    Essay,
+    GitCard
+    // Toc
+  },
+  data() {
+    const mobilePoint = 1264;
+    return {
+      navVisible: true,
+      miniNav: false,
+      mobilePoint: 1264,
+      offsetTop: 0,
+      progressRunning: false
+    };
+  },
+  computed: {
+    layout() {
+      return this.$page.frontmatter.layout || 'post';
     }
+  },
+  methods: {
+    createTitle() {
+      const title = `${this.$siteTitle} · ${this.$site.themeConfig.subTitle}`;
+      const pageTitle = this.$page.title;
+      return (pageTitle ? `${pageTitle} · ` : '') + title;
+    },
+    toggleNav() {
+      if (window.innerWidth > this.mobilePoint) {
+        this.miniNav = !this.miniNav;
+      } else {
+        this.navVisible = !this.navVisible;
+        this.miniNav = false;
+      }
+    },
+    onScroll(e) {
+      this.offsetTop = window.pageYOffset || document.documentElement.scrollTop;
+    }
+  },
+  created() {
+    if (this.$ssrContext) {
+      this.$ssrContext.title = this.createTitle();
+      this.$ssrContext.lang = this.$lang;
+      this.$ssrContext.description =
+        this.$page.description || this.$description;
+    } else {
+      this.navVisible = window.innerWidth > this.mobilePoint;
+    }
+  },
+  mounted() {
+    // update title / meta tags
+    // this.currentMetaTags = [];
+    // const updateMeta = () => {
+    //   document.title = this.createTitle();
+    //   document.documentElement.lang = this.$lang;
+    //   const meta = [
+    //     {
+    //       name: 'description',
+    //       content: this.$description
+    //     },
+    //     ...(this.$page.frontmatter.meta || [])
+    //   ];
+    //   this.currentMetaTags = updateMetaTags(meta, this.currentMetaTags);
+    // };
+    // this.$watch('$page', updateMeta);
+    // updateMeta();
+
+    this.$router.beforeEach((to, from, next) => {
+      if (
+        to.path !== from.path &&
+        !Vue.component(pathToComponentName(to.path))
+      ) {
+        this.progressRunning = true;
+      }
+      next();
+    });
+
+    this.$router.afterEach(() => {
+      this.progressRunning = false;
+    });
+  },
+  beforeDestroy() {
+    updateMetaTags(null, this.currentMetaTags);
   }
+};
 </script>
+<style src="@fortawesome/fontawesome-free-webfonts/css/fa-solid.css"></style>
+<style src="@fortawesome/fontawesome-free-webfonts/css/fa-regular.css"></style>
+<style src="@fortawesome/fontawesome-free-webfonts/css/fa-brands.css"></style>
+<style src="@fortawesome/fontawesome-free-webfonts/css/fontawesome.css"></style>
+<style src="prismjs/themes/prism-tomorrow.css"></style>

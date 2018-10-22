@@ -23,9 +23,9 @@ before_install:
 install:
 - yarn
 script:
-- yarn docs:build
+- yarn build
 after_success:
-- cd ./docs/.vuepress/dist
+- cd ./dist
 - git init
 - git add .
 - git commit -m "Travis CI Auto Builder"
