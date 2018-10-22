@@ -1,5 +1,5 @@
 <template>
-  <v-footer dark height="auto" class="blog-footer darken-1 mt-1">
+  <v-footer height="auto" class="blog-footer darken-1 mt-2">
     <v-card flat tile color="primary" class="primary--text text--lighten-4 text-xs-center py-3">
       <v-card-text class="pb-0">
         Released under the MIT License

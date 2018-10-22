@@ -4,7 +4,7 @@ import blog from './libs/blog'
 import VueContentPlaceholders from 'vue-content-placeholders'
 // import VueSimplemde from 'vue-simplemde'
 import routes from './libs/routes'
-import components from './components'
+import Vuetify from 'vuetify'
 import './styles/theme.styl'
 
 export default ({
@@ -24,6 +24,7 @@ export default ({
     theme,
     pages
   })
+  Vue.use(Vuetify)
   // Vue.use(essay, {
   //   theme,
   //   pages
@@ -32,5 +33,4 @@ export default ({
     router,
     theme
   })
-  Vue.use(components, theme)
 }

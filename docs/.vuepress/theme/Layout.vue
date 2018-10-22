@@ -7,7 +7,7 @@
     <Header :layout="layout" @toggleNav="toggleNav"></Header>
     <v-content>
       <component :is="layout"></component>
-      <Footer></Footer>
+      <Footer app></Footer>
     </v-content>
     <transition name="scale-transition">
       <v-btn fab fixed right bottom color="accent" @click="$vuetify.goTo(0)" v-show="offsetTop > 300">
