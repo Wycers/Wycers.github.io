@@ -25,12 +25,12 @@
           <v-card-actions>
             <v-chip>
               <i class="fa fa-users" aria-hidden="true">
-                {{ profile.followers }}
+                Follers: {{ profile.followers }}
               </i>
             </v-chip>
             <v-chip>
               <i class="fa fa-list" aria-hidden="true">
-                {{ profile.public_repos }}
+                Repos: {{ profile.public_repos }}
               </i>
             </v-chip>
             <v-spacer></v-spacer>
@@ -61,7 +61,7 @@ export default {
     return {
       snackbar: false,
       profile: null,
-      href: 'https://github.com/PedroGao',
+      href: 'https://github.com/Wycers',
       repos: []
     };
   },
@@ -82,12 +82,6 @@ export default {
         .then(res => {
           this.profile = res.data;
         });
-
-      // axios
-      //   .get(`https://api.github.com/users/${this.content.github}/repos`)
-      //   .then(res => {
-      //     console.log(res.data);
-      //   });
     }
   }
 };

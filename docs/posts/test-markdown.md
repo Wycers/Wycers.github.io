@@ -106,7 +106,7 @@ export default {
 
 示例：
 
-![我的头像](~@pub/face.jpg)
+![我的头像](~@pub/avatar.jpg)
 
 ### 10. 删除线
 

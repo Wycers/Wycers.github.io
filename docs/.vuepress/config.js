@@ -8,7 +8,7 @@ module.exports = {
   base: '/',
   dest: 'dist',
   title: "Wycer's blog",
-  description: '能传达到吗？一定能传达到吧。',
+  description: '花开花落，再灿烂的星光也会消失。',
   head: [
     ['link', {
       rel: 'shortcut icon',
@@ -50,7 +50,7 @@ module.exports = {
     '/': {
       lang: 'zh-CN',
       title: "Wycer's blog",
-      description: '能传达到吗？一定能传达到吧。'
+      description: '花开花落，再灿烂的星光也会消失。'
     }
   },
   configureWebpack: (config, isServer) => {
@@ -78,7 +78,7 @@ module.exports = {
     lang: 'zh-CN',
     postDir: '/posts',
     essayDir: '/articles',
-    subTitle: '以诗会友，以码做人',
+    subTitle: 'QwQ',
     author: 'Wycer',
     email: 'wycers@gmail.com',
     since: 2018,

@@ -1,7 +1,7 @@
 <template>
-  <div class="container">
+  <v-container grid-list-xl align-center class="blog-container py-5">
     <Content></Content>
-  </div>
+  </v-container>
 </template>
 <script>
 export default {

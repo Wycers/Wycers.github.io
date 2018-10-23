@@ -1,15 +1,14 @@
 <template>
   <div>
     <div class="aside-brand-wrap">
-      <div class="aside-brand">
+      <div class="aside-brand elevation-1">
         <router-link :to="content.avatarLink" class="aside-avatar elevation-2">
           <img :src="$withBase(content.avatar)" alt="avatar">
         </router-link>
-        <hgroup class="mt-3 variant-hide">
-          <div class="subheading white--text">{{content.author}}</div>
-          <!-- <a :href="`mailto:${content.email}`" :title="content.email" class="aside-mail primary--text text--lighten-5">{{content.email}}</a> -->
-          <a :title="content.email" class="aside-mail primary--text text--lighten-5">{{content.email}}</a>
-          <p class="caption">{{ $description }}</p>
+        <hgroup class="mt-3 variant-hide aside-group white--text">
+          <div class="headline">{{content.author}}</div>
+          <a :title="content.email" class="aside-mail white--text">{{content.email}}</a>
+          <p class="subheading mt-1 aside-description">{{ $description }}</p>
         </hgroup>
       </div>
     </div>
@@ -52,14 +51,19 @@ export default {
 .aside {
   &-brand {
     padding: 48px 24px 24px;
-    background: rgba($primary-color, 0.5);
+    background: rgba(black, 0.4);
     transition: 0.2s ease-in-out;
+    text-shadow: 3px 3px 5px #000000;
   }
 
   &-brand-wrap {
-    background-image: url('./imgs/bg.jpg');
+    background-image: url('./imgs/bg.png');
     background-repeat: no-repeat;
     background-size: 100% 100%;
+  }
+
+  &-description {
+    font-family: $font-roboto
   }
 
   &-avatar {
@@ -76,7 +80,10 @@ export default {
       height: 100%;
     }
   }
-
+  &-group {
+    border-radius 5px
+    padding: 2px
+  }
   &-mail {
     text-decoration: none;
 
