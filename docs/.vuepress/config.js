@@ -9,10 +9,23 @@ module.exports = {
   dest: 'dist',
   title: "Wycer's blog",
   description: '花开花落，再灿烂的星光也会消失。',
+  markdown: {
+    config: md => {
+      md.use(require("markdown-it-katex"));
+    }
+  },
   head: [
     ['link', {
       rel: 'shortcut icon',
       href: '/favicon.ico'
+    }],
+    ['link', {
+      rel: 'stylesheet',
+      href: 'https://unpkg.com/katex@0.6.0/dist/katex.min.css'
+    }],
+    ['link', {
+      rel: 'stylesheet',
+      href: 'https://cdn.jsdelivr.net/github-markdown-css/2.2.1/github-markdown.css'
     }],
     ['link', {
       rel: 'manifest',

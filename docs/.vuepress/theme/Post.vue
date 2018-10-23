@@ -6,7 +6,7 @@
           <Content></Content>
         </PostCard>
       </v-flex>
-      <!-- <v-flex xs6 class="text-xs-left">
+      <v-flex xs6 class="text-xs-left">
         <v-btn flat :to="$postNav.prev.path" v-if="$postNav.prev" class="post-nav">
           <div class="grey--text">
             <i class="fa mr-1 fa-chevron-left"></i>{{$tt('postNav_prev')}}</div>
@@ -20,7 +20,7 @@
           </div>
           <div class="title mt-1 primary--text hidden-xs-only">{{$postNav.next.title}}</div>
         </v-btn>
-      </v-flex> -->
+      </v-flex>
       <v-flex xs12 class="mt-3">
         <Comment></Comment>
       </v-flex>
