@@ -21,9 +21,9 @@
           <div class="title mt-1 primary--text hidden-xs-only">{{$postNav.next.title}}</div>
         </v-btn>
       </v-flex>
-      <v-flex xs12 class="mt-3">
+      <!-- <v-flex xs12 class="mt-3">
         <Comment></Comment>
-      </v-flex>
+      </v-flex> -->
     </v-layout>
     <post-toc />
   </v-container>
