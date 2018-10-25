@@ -56,7 +56,7 @@ const Mixin = {
             this.options = Object.assign(
                 this.options,
                 {
-                    id: location.hash,
+                    id: this.$page.title,
                     number: -1,
                     labels: ["Gitalk"],
                     title: document.title,
@@ -137,7 +137,7 @@ const Mixin = {
                     this.options,
                     {
                         url: replacedUrl,
-                        id: location.hash
+                        id: this.$page.title
                     },
                     this.$site.themeConfig.comment
                 );
