@@ -98,6 +98,15 @@ module.exports = {
     avatar: '/avatar.jpg',
     github: 'Wycers',
     avatarLink: '/',
+    comment: {
+      clientID: '9177e010a77733962ec3',
+      clientSecret: '927d778b40b56948aa055b2f7ab7cb24c40e1168',
+      repo: 'Wycers.github.io',
+      owner: 'Wycers',
+      admin: ['Wycers'],
+      distractionFreeMode: false,
+      id: 'window.location.pathname'
+    },
     menus: [
       // icons by https://fontawesome.com/icons
       {

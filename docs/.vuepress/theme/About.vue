@@ -8,5 +8,3 @@ export default {
   name: ''
 };
 </script>
-<style lang="stylus">
-</style>
