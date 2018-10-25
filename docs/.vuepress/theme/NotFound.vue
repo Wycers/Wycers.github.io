@@ -3,8 +3,6 @@ div(style="height: 100%")
   v-layout(align-center column justify-center ma-5)
     h1.display-2.font-weight-thin.mb-3 Not Found
     h4.subheading.mb-5 How could you get here?
-    
-
     blockquote.blockquote(style="max-width: 60%")
       | &#8220;
       | {{ hitokoto }}
@@ -35,14 +33,6 @@ export default {
       interval: 0
     };
   },
-  mounted () {
-    this.startBuffer()
-    this.refresh()
-  },
-  beforeDestroy () {
-    clearInterval(this.interval)
-  },
-
   methods: {
     startBuffer () {
       this.interval = setInterval(() => {
@@ -54,10 +44,27 @@ export default {
         if (res.status === 200) {
           this.hitokoto = res.data.hitokoto
           this.from = res.data.from
-          console.log(res)
         }
       })
     }
+  },
+  mounted () {
+    const updateMeta = () => {
+      document.title = `${this.$siteTitle} · Not Found`;
+    };
+    this.$watch('$page', updateMeta);
+    updateMeta();
+
+    // this.startBuffer()
+    this.refresh()
+  },
+  beforeDestroy () {
+    clearInterval(this.interval)
+  },
+  created() {
+    if (this.$ssrContext) {
+      this.$ssrContext.title = `${this.$siteTitle} · Not Found`;
+    } 
   }
 }
 </script>
