@@ -1,7 +1,7 @@
 <template>
  <v-card>
   <v-card-title>
-    <span class="headline">评论区 {{ options }}</span>
+    <span class="headline">评论区</span>
   </v-card-title>
   <v-container>
     <div :class="containerClass">
