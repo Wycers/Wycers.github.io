@@ -2,7 +2,7 @@
 title: "[DSAA-Lab5]F. Longest Common Substring"
 date: 2018-10-24 17:07:14
 draft: false
-tags: ["CS203A", "SAM"]
+tags: ["CS203A", "KMP", "SAM"]
 author: "Wycer"
 ---
 

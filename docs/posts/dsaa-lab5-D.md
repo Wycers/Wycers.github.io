@@ -2,7 +2,7 @@
 title: "[DSAA-Lab5]D. A Skr Song"
 date: 2018-10-24 16:30:59
 draft: false
-tags: ["CS203A", "KMP"]
+tags: ["CS203A", "暴力", "KMP"]
 author: "Wycer"
 ---
 

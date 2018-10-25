@@ -2,7 +2,7 @@
 title: "[DSAA-Lab5]G. Typer"
 date: 2018-10-24 17:31:44
 draft: false
-tags: ["CS203A", "AC自动机"]
+tags: ["CS203A", "AC自动机", "FSA"]
 author: "Wycer"
 ---
 
