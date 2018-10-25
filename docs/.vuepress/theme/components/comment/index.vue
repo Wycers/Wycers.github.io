@@ -3,166 +3,168 @@
   <v-card-title>
     <span class="headline">评论区</span>
   </v-card-title>
-  <div :class="containerClass">
-    <!-- 初始化 loading -->
-    <div class="gt-initing" v-if="isIniting">
-      <i class="gt-loader"/>
-      <p class="gt-initing-text">{{i18n.t('init')}}</p>
-    </div>
-    <!-- meta -->
-    <div class="gt-meta" key="meta" v-if="!isIniting && !isNoInit">
-      <span class="gt-counts" v-html="countHtml()"></span>
-      <!-- popup -->
-      <div class="gt-popup" v-if="isPopupVisible">
-        <Action
-          v-if="user"
-          @click="handleSort('first')"
-          :class="ascClasses" 
-          :text="i18n.t('sort-asc')"/>
-        <Action
-          v-if="user"
-          @click="handleSort('last')"
-          :class="descClasses" 
-          :text="i18n.t('sort-desc')"/>
-        <Action 
-          v-if="user"
-          class='gt-action-logout'
-          @click="handleLogout"
-          :text="i18n.t('logout')"/>
-        <a v-else class="gt-action gt-action-login" @click="handleLogin">
-          {{i18n.t('login-with-github')}}
-        </a>
-        <div class="gt-copyright">
-          <a 
-            class="gt-link gt-link-project" href="https://github.com/gitalk/gitalk" 
-            target="_blank">
-            Gitalk
+  <v-container>
+    <div :class="containerClass">
+      <!-- 初始化 loading -->
+      <div class="gt-initing" v-if="isIniting">
+        <i class="gt-loader"/>
+        <p class="gt-initing-text">{{i18n.t('init')}}</p>
+      </div>
+      <!-- meta -->
+      <div class="gt-meta" key="meta" v-if="!isIniting && !isNoInit">
+        <span class="gt-counts" v-html="countHtml()"></span>
+        <!-- popup -->
+        <div class="gt-popup" v-if="isPopupVisible">
+          <Action
+            v-if="user"
+            @click="handleSort('first')"
+            :class="ascClasses" 
+            :text="i18n.t('sort-asc')"/>
+          <Action
+            v-if="user"
+            @click="handleSort('last')"
+            :class="descClasses" 
+            :text="i18n.t('sort-desc')"/>
+          <Action 
+            v-if="user"
+            class='gt-action-logout'
+            @click="handleLogout"
+            :text="i18n.t('logout')"/>
+          <a v-else class="gt-action gt-action-login" @click="handleLogin">
+            {{i18n.t('login-with-github')}}
           </a>
-        </div>
-      </div>
-      <div class="gt-user">
-        <div 
-          v-if="user" 
-          :class='userInnerClass' 
-          @click.stop.prevent="handlePopup">
-          <span class="gt-user-name">{{user.login}}</span>
-          <SvgSpiner class="gt-ico-arrdown" name="arrow_down"/>
-        </div>
-        <div 
-          v-else 
-          :class='userInnerClass'
-          @click.stop.prevent="handlePopup">
-          <span class="gt-user-name">{{i18n.t('anonymous')}}</span>
-          <SvgSpiner class="gt-ico-arrdown" name="arrow_down"/>
-        </div>
-      </div>
-    </div>
-    <!-- error msg -->
-    <div class="gt-error" v-if="isOccurError">
-      {{errorMsg}}
-    </div>
-    <!-- 初始化失败 -->
-    <div class="gt-no-init" key="no-init" v-if="!isIniting && isNoInit">
-      <p v-html="noInitHtml()"></p>
-      <p v-html="concatAuthorHtml()"></p>
-      <p v-if="isAdmin">
-        <Button @click="handleIssueCreate" :isLoading="isIssueCreating">
-            <span class="gt-btn-text">{{i18n.t('init-issue')}}</span>
-        </Button>
-      </p>
-      <Button 
-        v-if="!user"
-        class="gt-btn-login" 
-        @click="handleLogin">
-        <span class="gt-btn-text">{{i18n.t('login-with-github')}}</span>
-      </Button>
-    </div>
-    <!-- 初始化成功 -->
-    <div v-else>
-      <!-- header -->
-      <div class="gt-header" key="header">
-        <div v-if="user" class="gt-avatar gt-header-avatar">
-          <img :src="user.avatar_url" alt="avatar">
-        </div>
-        <a v-else class="gt-avatar-github" @click="handleLogin">
-          <SvgSpiner class="gt-ico-github" name="github"/>
-        </a>
-        <div class="gt-header-comment">
-          <textarea
-            ref="commentEL"
-            :class="contentClasses"
-            v-model="comment"
-            @focus="handleCommentFocus"
-            @blur="handleCommentBlur"
-            @keydown.meta.enter="handleCommentKeyDown"
-            @keydown.ctrl.enter="handleCommentKeyDown"
-            :placeholder="i18n.t('leave-a-comment')"
-          />
-          <div :class="previewClasses" v-html="previewHtml" />
-          <!-- comment action area -->
-          <div class="gt-header-controls">
+          <div class="gt-copyright">
             <a 
-              class="gt-header-controls-tip" 
-              href="https://guides.github.com/features/mastering-markdown/" 
+              class="gt-link gt-link-project" href="https://github.com/gitalk/gitalk" 
               target="_blank">
-              <SvgSpiner 
-                class="gt-ico-tip" 
-                name="tip" 
-                :text="i18n.t('support-markdown')"/>
+              Gitalk
             </a>
-            <Button
-              v-if="user"
-              class="gt-btn-public"
-              @click="handleCommentCreate"
-              :isLoading="isCreating">
-                <span class="gt-btn-text">{{i18n.t('comment')}}</span>
-            </Button>
-            <Button
-              class="gt-btn-preview"
-              @click="handleCommentPreview">
-              <span class="gt-btn-text">{{editOrPreview}}</span>
-            </Button>
+          </div>
+        </div>
+        <div class="gt-user">
+          <div 
+            v-if="user" 
+            :class='userInnerClass' 
+            @click.stop.prevent="handlePopup">
+            <span class="gt-user-name">{{user.login}}</span>
+            <SvgSpiner class="gt-ico-arrdown" name="arrow_down"/>
+          </div>
+          <div 
+            v-else 
+            :class='userInnerClass'
+            @click.stop.prevent="handlePopup">
+            <span class="gt-user-name">{{i18n.t('anonymous')}}</span>
+            <SvgSpiner class="gt-ico-arrdown" name="arrow_down"/>
+          </div>
+        </div>
+      </div>
+      <!-- error msg -->
+      <div class="gt-error" v-if="isOccurError">
+        {{errorMsg}}
+      </div>
+      <!-- 初始化失败 -->
+      <div class="gt-no-init" key="no-init" v-if="!isIniting && isNoInit">
+        <p v-html="noInitHtml()"></p>
+        <p v-html="concatAuthorHtml()"></p>
+        <p v-if="isAdmin">
+          <Button @click="handleIssueCreate" :isLoading="isIssueCreating">
+              <span class="gt-btn-text">{{i18n.t('init-issue')}}</span>
+          </Button>
+        </p>
+        <Button 
+          v-if="!user"
+          class="gt-btn-login" 
+          @click="handleLogin">
+          <span class="gt-btn-text">{{i18n.t('login-with-github')}}</span>
+        </Button>
+      </div>
+      <!-- 初始化成功 -->
+      <div v-else>
+        <!-- header -->
+        <div class="gt-header" key="header">
+          <div v-if="user" class="gt-avatar gt-header-avatar">
+            <img :src="user.avatar_url" alt="avatar">
+          </div>
+          <a v-else class="gt-avatar-github" @click="handleLogin">
+            <SvgSpiner class="gt-ico-github" name="github"/>
+          </a>
+          <div class="gt-header-comment">
+            <textarea
+              ref="commentEL"
+              :class="contentClasses"
+              v-model="comment"
+              @focus="handleCommentFocus"
+              @blur="handleCommentBlur"
+              @keydown.meta.enter="handleCommentKeyDown"
+              @keydown.ctrl.enter="handleCommentKeyDown"
+              :placeholder="i18n.t('leave-a-comment')"
+            />
+            <div :class="previewClasses" v-html="previewHtml" />
+            <!-- comment action area -->
+            <div class="gt-header-controls">
+              <a 
+                class="gt-header-controls-tip" 
+                href="https://guides.github.com/features/mastering-markdown/" 
+                target="_blank">
+                <SvgSpiner 
+                  class="gt-ico-tip" 
+                  name="tip" 
+                  :text="i18n.t('support-markdown')"/>
+              </a>
+              <Button
+                v-if="user"
+                class="gt-btn-public"
+                @click="handleCommentCreate"
+                :isLoading="isCreating">
+                  <span class="gt-btn-text">{{i18n.t('comment')}}</span>
+              </Button>
+              <Button
+                class="gt-btn-preview"
+                @click="handleCommentPreview">
+                <span class="gt-btn-text">{{editOrPreview}}</span>
+              </Button>
+              <Button 
+                v-if="!user"
+                class="gt-btn-login" 
+                @click="handleLogin">
+                <span class="gt-btn-text">{{i18n.t('login-with-github')}}</span>    
+              </Button>
+            </div>
+          </div>
+        </div>
+        <!-- comments list -->
+        <div class="gt-comments" key="comments">
+          <transition-group name="flip-list">
+            <Comment 
+              v-for="c in totalComments" 
+              :comment="c"
+              :key="c.id"
+              :user="user"
+              :language="options.language"
+              :commentedText="i18n.t('commented')"
+              :admin="options.admin"
+              @like="like"
+              @unlike="unLike"
+              @reply="reply" />
+          </transition-group>
+            
+          <p v-if="!totalComments.length" class="gt-comments-null">
+              {{i18n.t('first-comment-person')}}
+          </p>
+          <div 
+            v-if="!isLoadOver && totalComments.length" 
+            class="gt-comments-controls">
             <Button 
-              v-if="!user"
-              class="gt-btn-login" 
-              @click="handleLogin">
-              <span class="gt-btn-text">{{i18n.t('login-with-github')}}</span>    
+              class="gt-btn-loadmore" 
+              @click="handleCommentLoad" 
+              :isLoading="isLoadMore">
+              <span class="gt-btn-text">{{i18n.t('load-more')}}</span>    
             </Button>
           </div>
         </div>
       </div>
-      <!-- comments list -->
-      <div class="gt-comments" key="comments">
-        <transition-group name="flip-list">
-          <Comment 
-            v-for="c in totalComments" 
-            :comment="c"
-            :key="c.id"
-            :user="user"
-            :language="options.language"
-            :commentedText="i18n.t('commented')"
-            :admin="options.admin"
-            @like="like"
-            @unlike="unLike"
-            @reply="reply" />
-        </transition-group>
-          
-        <p v-if="!totalComments.length" class="gt-comments-null">
-            {{i18n.t('first-comment-person')}}
-        </p>
-        <div 
-          v-if="!isLoadOver && totalComments.length" 
-          class="gt-comments-controls">
-          <Button 
-            class="gt-btn-loadmore" 
-            @click="handleCommentLoad" 
-            :isLoading="isLoadMore">
-            <span class="gt-btn-text">{{i18n.t('load-more')}}</span>    
-          </Button>
-        </div>
-      </div>
     </div>
-  </div>
+  </v-container>
 </v-card>
 </template>
 

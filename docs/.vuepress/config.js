@@ -104,8 +104,7 @@ module.exports = {
       repo: 'Wycers.github.io',
       owner: 'Wycers',
       admin: ['Wycers'],
-      distractionFreeMode: false,
-      id: 'window.location.pathname'
+      distractionFreeMode: false
     },
     menus: [
       // icons by https://fontawesome.com/icons
