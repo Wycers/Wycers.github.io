@@ -21,23 +21,37 @@
           <div class="title mt-1 primary--text hidden-xs-only">{{$postNav.next.title}}</div>
         </v-btn>
       </v-flex>
-      <!-- <v-flex xs12 class="mt-3">
-        <Comment></Comment>
-      </v-flex> -->
+      <v-flex xs12 class="mt-3">
+        <div id="gitalk-container"></div>
+      </v-flex>
     </v-layout>
     <post-toc />
   </v-container>
 </template>
 <script>
 import PostCard from './components/PostCard';
-import Comment from './components/Comment';
+// import Comment from './components/Comment';
 import PostToc from './components/PostToc';
+import 'gitalk/dist/gitalk.css';
+import Gitalk from 'gitalk';
 
 export default {
   components: {
     PostCard,
-    Comment,
+    // Comment,
     PostToc
+  },
+  mounted () {
+    const gitalk = new Gitalk({
+      clientID: '9177e010a77733962ec3',
+      clientSecret: '927d778b40b56948aa055b2f7ab7cb24c40e1168',
+      repo: 'Wycers.github.io',
+      owner: 'Wycers',
+      admin: ['Wycers'],
+      id: location.pathname,      // Ensure uniqueness and length less than 50
+      distractionFreeMode: false  // Facebook-like distraction free mode
+    })
+    gitalk.render('gitalk-container')
   }
 };
 </script>
