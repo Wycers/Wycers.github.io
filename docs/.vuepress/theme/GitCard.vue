@@ -25,7 +25,7 @@
           <v-card-actions>
             <v-chip>
               <i class="fa fa-users" aria-hidden="true">
-                Follers: {{ profile.followers }}
+                Followers: {{ profile.followers }}
               </i>
             </v-chip>
             <v-chip>
