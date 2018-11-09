@@ -1,20 +1,23 @@
 ---
-title: "[DSAA-Bonus]C. The kth smallest number"
-date: 2018-10-30 00:33:58
+title: "[DSAA-Bonus]D: Only one choice?"
+date: 2018-11-09 11:23:35
 draft: false
 tags: ["CS203A"]
 author: "Wycer"
 ---
 
-数据结构与算法分析A Bonus Lab C题题解
+数据结构与算法分析A Bonus Lab D题题解
 
 <!-- more -->
 
 ## Description
-Hong wants you to sort a given array.  Hong is good at sorting, so he wants to make it more difficult.
+Hong wants to sort a given permutation by swapping two adjacent elements.  It's easy for Hong to do that with minimum operations.
 
-Each time, you can only choose two adjacent elements and swap them.
-Hong wants to know how many swaps do you need at least to make the array in ascending order.
+Hong find that for some permutation, the solution is unique.  Hong thinks that these permutation is good.
+
+However, Hong is not good at maths.  He asks you to judge whether the solution for the given permutation is unqiue.
+
+Solution means the sequence of elements we choose in each operation.
 
 ## Input
 The first line will be an integer T (1≤T≤10), which is the number of test cases.  
@@ -23,35 +26,37 @@ For each test data:
 
 The first line contains one integer N (1≤N≤10^5) — the number of the integers.
 
-The next line contains N integers Ai(1≤Ai≤10^9).
+The next line contains N integers, a permutation of 1,2,...,N.
 
 ## Output
-For each case, please print the least swap you need to make the array in ascending order.
+For each case, if there is a unique solution for this case, output one character 'Y'. Otherwise, output 'N'.
 
 ### Sample Input
 ```
+3
 1
+1
+3
+3 2 1
 4
-4 1 2 3
+3 1 2 4
 ```
 ### Sample Output
 ```
-3
+Y
+N
+Y
 ```
 
 ## 思路
 
-题意就是给出n个数字，问至少要多少次交换才能使其有序。交换只能交换相邻元素。
-
-即为逆序对个数。逆序对即满足 $a_i > a_j (i < j)$ 的整数对 $(i, j)$ 的个数。
-
-求逆序对个数的常用方法有树状数组、归并排序。
+题意就是给出n个数字，问是否只有一种交换次数最少且能使其有序的交换方法。交换只能交换相邻元素。
 
 ## Solution
 
 ### 归并排序
 
-对于左右两半有序区间 $(l, mid)$ 和 $(mid + 1, r)$，若 $i < j$ 且 $a_i > a_j (i < j)$，那么 $a_j$ 这个元素能与前面 $mid - i + 1$ 个元素产生逆序对。
+结论是逆序对数量小于n的时候才能保证这种交换方法唯一。
 
 ``` cpp
 #include <cstdio>
@@ -89,6 +94,8 @@ void merge(int l, int m, int r)
             tmp[now++] = a[j++];
             ans += m - i + 1;
         }
+    while (i <= m)
+        tmp[now++] = a[i++];
     memcpy(tmp + now, a + i, (m - i + 1) * sz);
     memcpy(tmp + now, a + j, (r - j + 1) * sz);
     memcpy(a + l, tmp + l, (r - l + 1) * sz);
@@ -102,8 +109,8 @@ void msort(int l, int r)
     msort(mid + 1, r);
     merge(l, mid, r);
 }
-
-
+   
+   
 void solve()
 {
     int n = read();
@@ -111,7 +118,7 @@ void solve()
         a[i] = read();
     ans = 0;
     msort(1, n);
-    printf("%lld\n", ans);
+    puts(ans < n ? "Y" : "N");
 }
 int main()
 {
@@ -119,5 +126,5 @@ int main()
     while (T--)
         solve();
     return 0;
-}   
+}
 ```
