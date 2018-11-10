@@ -5,6 +5,7 @@ import VueContentPlaceholders from 'vue-content-placeholders'
 // import VueSimplemde from 'vue-simplemde'
 import routes from './libs/routes'
 import Vuetify from 'vuetify'
+import colors from 'vuetify/es5/util/colors'
 import './styles/theme.styl'
 
 export default ({
@@ -24,11 +25,18 @@ export default ({
     theme,
     pages
   })
-  Vue.use(Vuetify)
-  // Vue.use(essay, {
-  //   theme,
-  //   pages
-  // })
+  Vue.use(Vuetify, {
+    theme: {
+      primary: colors.blue.darken3, // a color that is not in the material colors palette
+      accent: colors.grey.darken3,
+      secondary: colors.grey.darken3,
+      info: colors.teal.lighten1,
+      warning: colors.amber.base,
+      error: colors.deepOrange.accent4,
+      success: colors.green.accent3
+    }
+  })
+  
   Vue.use(routes, {
     router,
     theme
