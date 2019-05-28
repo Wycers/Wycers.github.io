@@ -21,11 +21,11 @@ module.exports = {
     }],
     ['link', {
       rel: 'stylesheet',
-      href: 'https://unpkg.com/katex@0.6.0/dist/katex.min.css'
+      href: 'https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css'
     }],
     ['link', {
-      rel: 'stylesheet',
-      href: 'https://cdn.jsdelivr.net/github-markdown-css/2.2.1/github-markdown.css'
+      rel: "stylesheet",
+      href: "https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.10.0/github-markdown.min.css"
     }],
     ['link', {
       rel: 'manifest',
