@@ -98,6 +98,7 @@ module.exports = {
     avatar: '/avatar.jpg',
     github: 'Wycers',
     avatarLink: '/',
+    icpLicense: "粤ICP备18027145号-1",
     comment: {
       clientID: '9177e010a77733962ec3',
       clientSecret: '927d778b40b56948aa055b2f7ab7cb24c40e1168',
